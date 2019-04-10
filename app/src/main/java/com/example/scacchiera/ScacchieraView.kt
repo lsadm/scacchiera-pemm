@@ -10,9 +10,15 @@ import android.view.View
 
 class ScacchieraView : View {
     var dim = 4
-
-    val paint1=Paint().also { it.color=Color.BLUE }
-    var paint2=Paint().also { it.color=Color.YELLOW }
+    private val bRectMatrix = ArrayList<Boolean>().also {
+        var b=true
+        for (i in 0 until (dim*dim)){
+            it[i]=b
+            b=!b
+        }
+    }
+    private val paint1=Paint().also { it.color=Color.BLUE }
+    private val paint2=Paint().also { it.color=Color.YELLOW }
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
@@ -26,7 +32,7 @@ class ScacchieraView : View {
 
         for(i in 0 until dim){
             for(j in 0 until dim){
-                if((i+j)%2==0){
+                if(bRectMatrix[i*dim+j]){
                     canvas!!.drawRect((i*rectWidth).toFloat(),(j*rectHeight).toFloat(),((i+1)*rectWidth).toFloat(),((j+1)*rectHeight).toFloat(),paint1)
                 }else{
                     canvas!!.drawRect((i*rectWidth).toFloat(),(j*rectHeight).toFloat(),((i+1)*rectWidth).toFloat(),((j+1)*rectHeight).toFloat(),paint2)
