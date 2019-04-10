@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">scacchiera</string>
+    <string name="gioca">Gioca</string>
+    <string name="numero_mosse">Numero mosse: </string>
+    <string name="vittorie">Vittorie: </string>
+    <string name="dimensioni">Dimensioni: </string>
 </resources>

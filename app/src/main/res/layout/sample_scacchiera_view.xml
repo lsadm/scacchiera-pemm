@@ -8,7 +8,7 @@
             android:background="#ccc"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
             android:paddingBottom="40dp"
             app:exampleDimension="24sp"
             app:exampleColor="#33b5e5"
