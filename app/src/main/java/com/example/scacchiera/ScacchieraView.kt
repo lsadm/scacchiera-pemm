@@ -78,6 +78,7 @@ class ScacchieraView : View {
                     isPlaying = false
                     Snackbar.make(this, "Complimenti!! Hai vinto|", Snackbar.LENGTH_LONG).show()
                     victoryListener.onVictory(++victories)
+                    regenerateMatrix()
                 }
 
                 moveListener.onMove(++moves)
