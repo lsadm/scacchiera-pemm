@@ -77,7 +77,7 @@ class ScacchieraView : View {
                 if (hasWon()) {
                     isPlaying = false
                     Snackbar.make(this, "Complimenti!! Hai vinto|", Snackbar.LENGTH_LONG).show()
-                    victoryListener.onVictory(victories)
+                    victoryListener.onVictory(++victories)
                 }
 
                 moveListener.onMove(++moves)
