@@ -74,6 +74,8 @@ class ScacchieraView : View {
 
                 invalidate()
 
+                moveListener.onMove(++moves)
+
                 if (hasWon()) {
                     isPlaying = false
                     Snackbar.make(this, "Complimenti!! Hai vinto|", Snackbar.LENGTH_LONG).show()
@@ -81,7 +83,6 @@ class ScacchieraView : View {
                     regenerateMatrix()
                 }
 
-                moveListener.onMove(++moves)
             } else {
                 Snackbar.make(this, "Premi Gioca per cominciare a giocare.", Snackbar.LENGTH_LONG).show()
             }

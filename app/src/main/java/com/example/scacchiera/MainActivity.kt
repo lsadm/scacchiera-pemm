@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                // Display the current progress of SeekBar
                 dimTextView.text = " ${i + 4}"
                 scacchiera.dim = i + 4
                 scacchiera.isPlaying = false
@@ -36,7 +35,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         playButton.setOnClickListener {
-            scacchiera.isPlaying = true
+            if (scacchiera.isPlaying){
+                scacchiera.regenerateMatrix()
+                scacchiera.isPlaying=false
+            }else{
+                scacchiera.isPlaying=true
+            }
         }
     }
 }
