@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         playButton.setOnClickListener {
-            if (scacchiera.isPlaying){
+            if (scacchiera.isPlaying) {
                 scacchiera.regenerateMatrix()
-                scacchiera.isPlaying=false
-            }else{
-                scacchiera.isPlaying=true
+                scacchiera.isPlaying = false
+            } else {
+                scacchiera.isPlaying = true
             }
         }
     }

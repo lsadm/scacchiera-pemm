@@ -60,13 +60,12 @@ class ScacchieraView : View {
         val rectWidth = width / dim
         if (event?.action == MotionEvent.ACTION_DOWN) {
             if (isPlaying) {
-                val riga = (event.y / rectHeight).toInt() + 1
-                val col = (event.x / rectWidth).toInt() + 1
-
+                val riga = (event.y / rectHeight).toInt()
+                val col = (event.x / rectWidth).toInt()
 
                 bRectMatrix.apply {
                     this.forEachIndexed { index, b ->
-                        if (index % dim == riga - 1 || (((col - 1) * dim) until (col - 1) * dim + dim).contains(index)) {
+                        if (index % dim == riga || ((col * dim) until col * dim + dim).contains(index)) {
                             this[index] = !b
                         }
                     }
@@ -78,7 +77,7 @@ class ScacchieraView : View {
 
                 if (hasWon()) {
                     isPlaying = false
-                    Snackbar.make(this, "Complimenti!! Hai vinto|", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(this, "Complimenti!! Hai vinto in $moves mosse.", Snackbar.LENGTH_LONG).show()
                     victoryListener.onVictory(++victories)
                     regenerateMatrix()
                 }
@@ -96,7 +95,7 @@ class ScacchieraView : View {
             var b = true
             for (i in 1..(dim * dim)) {
                 it.add(b)
-                if (i % dim != 0 || dim%2!=0) {
+                if (i % dim != 0 || dim % 2 != 0) {
                     b = !b
                 }
             }
@@ -105,7 +104,7 @@ class ScacchieraView : View {
 
     fun regenerateMatrix() {
         bRectMatrix = generateMatrix()
-        moves=0
+        moves = 0
         moveListener.onMove(0)
     }
 
