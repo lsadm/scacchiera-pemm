@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         playButton.setOnClickListener {
             if (scacchiera.isPlaying) {
                 scacchiera.regenerateMatrix()
-                scacchiera.isPlaying = false
             } else {
                 scacchiera.isPlaying = true
             }

@@ -106,6 +106,7 @@ class ScacchieraView : View {
         bRectMatrix = generateMatrix()
         moves = 0
         moveListener.onMove(0)
+        invalidate()
     }
 
     private fun hasWon(): Boolean {
