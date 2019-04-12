@@ -11,14 +11,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dimSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                dimTextView.text = " ${i + 4}"
+                dimTextView.text = String.format(" %d", i + 4)
                 scacchiera.dim = i + 4
                 scacchiera.isPlaying = false
                 scacchiera.regenerateMatrix()
@@ -27,11 +25,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         scacchiera.setOnVictoryListener {
-            winText.text = " $it"
+            winText.text = String.format(" %d", it)
         }
 
         scacchiera.setOnMoveListener {
-            numClickText.text = " $it"
+            numClickText.text = String.format(" %d", it)
         }
 
         playButton.setOnClickListener {

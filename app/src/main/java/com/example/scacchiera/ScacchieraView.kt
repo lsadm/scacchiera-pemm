@@ -23,6 +23,13 @@ class ScacchieraView : View {
     private val paint1 = Paint().also { it.color = Color.BLUE }
     private val paint2 = Paint().also { it.color = Color.YELLOW }
 
+    private val directions = mapOf(
+        "up" to Pair(0, 1),
+        "down" to Pair(0, -1),
+        "right" to Pair(1, 0),
+        "left" to Pair(-1, 0)
+    )
+
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
@@ -130,13 +137,27 @@ class ScacchieraView : View {
         }
     }
 
-
-    interface onVictoryListener {
-        fun onVictory(n: Int)
+    private fun shiftMatrix(direction: Pair<Int, Int>) {
+        val (dx, dy) = direction
+        val newMatrix = bRectMatrix.toMutableList()
+        for (i in 0 until dim) {
+            for (j in 0 until dim) {
+                val newIndex = (i + (dim - dx)) % dim * dim + (j + (dim - dy)) % dim
+                newMatrix[newIndex] = bRectMatrix[i * dim + j]
+            }
+        }
+        bRectMatrix = newMatrix
     }
 
-    interface onMoveListener {
-        fun onMove(n: Int)
+    companion object {
+        interface onVictoryListener {
+            fun onVictory(n: Int)
+        }
+
+        interface onMoveListener {
+            fun onMove(n: Int)
+        }
     }
+
+
 }
-
