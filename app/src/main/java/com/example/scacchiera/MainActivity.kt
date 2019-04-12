@@ -18,18 +18,16 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 dimTextView.text = String.format(" %d", i + 4)
                 scacchiera.dim = i + 4
-                scacchiera.isPlaying = false
-                scacchiera.regenerateMatrix()
-                scacchiera.invalidate()
+                resetScacchiera()
             }
         })
 
         scacchiera.setOnVictoryListener {
-            winText.text = String.format(" %d", it)
+            winTextView.text = String.format(" %d", it)
         }
 
         scacchiera.setOnMoveListener {
-            numClickText.text = String.format(" %d", it)
+            numClickTextView.text = String.format(" %d", it)
         }
 
         playButton.setOnClickListener {
@@ -39,5 +37,30 @@ class MainActivity : AppCompatActivity() {
                 scacchiera.isPlaying = true
             }
         }
+
+        difficultyTextView.setOnClickListener {
+            when (scacchiera.difficulty) {
+                ScacchieraView.Difficulty.EASY -> {
+                    scacchiera.difficulty = ScacchieraView.Difficulty.MEDIUM
+                    difficultyTextView.text = getString(R.string.medium)
+                }
+                ScacchieraView.Difficulty.MEDIUM -> {
+                    scacchiera.difficulty = ScacchieraView.Difficulty.HARD
+                    difficultyTextView.text = getString(R.string.hard)
+                }
+                ScacchieraView.Difficulty.HARD -> {
+                    scacchiera.difficulty = ScacchieraView.Difficulty.EASY
+                    difficultyTextView.text = getString(R.string.easy)
+                }
+            }
+
+            resetScacchiera()
+        }
+    }
+
+    fun resetScacchiera() {
+        scacchiera.isPlaying = false
+        scacchiera.regenerateMatrix()
+        scacchiera.invalidate()
     }
 }

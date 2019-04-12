@@ -8,14 +8,23 @@ import android.support.design.widget.Snackbar
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.random.Random
 
 class ScacchieraView : View {
+
     var dim = 4
     var isPlaying = false
+    var difficulty = Difficulty.EASY
     private var pad = 5
     private var bRectMatrix = generateMatrix()
     private var victories = 0
     private var moves = 0
+
+    enum class Difficulty {
+        EASY,
+        MEDIUM,
+        HARD
+    }
 
     private lateinit var moveListener: onMoveListener
     private lateinit var victoryListener: onVictoryListener
@@ -24,10 +33,10 @@ class ScacchieraView : View {
     private val paint2 = Paint().also { it.color = Color.YELLOW }
 
     private val directions = mapOf(
-        "up" to Pair(0, 1),
-        "down" to Pair(0, -1),
-        "right" to Pair(1, 0),
-        "left" to Pair(-1, 0)
+        "up" to Pair(1, 0),
+        "down" to Pair(-1, 0),
+        "right" to Pair(0, 1),
+        "left" to Pair(0, -1)
     )
 
     constructor(context: Context?) : super(context)
@@ -78,9 +87,25 @@ class ScacchieraView : View {
                     }
                 }
 
-                invalidate()
-
                 moveListener.onMove(++moves)
+
+                when (difficulty) {
+                    Difficulty.MEDIUM -> {
+                        if (moves % 6 == 0) {
+                            shiftMatrix(directions.values.random())
+                            Snackbar.make(this, "Shift!", Snackbar.LENGTH_LONG).show()
+                        }
+                    }
+                    Difficulty.HARD -> {
+                        if (moves % 5 == 0) {
+                            randomFlip()
+                        }
+                    }
+                    else -> {
+                    }
+                }
+
+                invalidate()
 
                 if (hasWon()) {
                     isPlaying = false
@@ -146,7 +171,13 @@ class ScacchieraView : View {
                 newMatrix[newIndex] = bRectMatrix[i * dim + j]
             }
         }
+        println("Shift $direction")
         bRectMatrix = newMatrix
+    }
+
+    private fun randomFlip() {
+        val rand = Random.nextInt(dim * dim)
+        bRectMatrix[rand] = !bRectMatrix[rand]
     }
 
     companion object {
@@ -158,6 +189,6 @@ class ScacchieraView : View {
             fun onMove(n: Int)
         }
     }
-
-
 }
+
+fun Boolean.toInt(): Int = if (this) 1 else 0

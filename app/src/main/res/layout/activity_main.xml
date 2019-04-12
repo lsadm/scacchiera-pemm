@@ -37,7 +37,7 @@
             <TextView
                     android:text=" 0"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/winText" android:layout_weight="1"/>
+                    android:layout_height="wrap_content" android:id="@+id/winTextView" android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -50,7 +50,19 @@
             <TextView
                     android:text=" 0"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/numClickText" android:layout_weight="0"/>
+                    android:layout_height="wrap_content" android:id="@+id/numClickTextView" android:layout_weight="0"/>
+            <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1"/>
+            <TextView
+                    android:text="Difficoltà: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="0"/>
+            <TextView
+                    android:text="Facile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/difficultyTextView"
+                    android:layout_weight="0"/>
             <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_weight="1"/>
