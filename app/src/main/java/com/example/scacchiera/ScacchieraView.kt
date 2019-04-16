@@ -92,8 +92,9 @@ class ScacchieraView : View {
                 when (difficulty) {
                     Difficulty.MEDIUM -> {
                         if (moves % 6 == 0) {
-                            shiftMatrix(directions.values.random())
-                            Snackbar.make(this, "Shift!", Snackbar.LENGTH_LONG).show()
+                            val dir = directions.entries.random()
+                            shiftMatrix(dir.value)
+                            Snackbar.make(this, "Shift ${dir.key}!", Snackbar.LENGTH_LONG).show()
                         }
                     }
                     Difficulty.HARD -> {
@@ -190,5 +191,3 @@ class ScacchieraView : View {
         }
     }
 }
-
-fun Boolean.toInt(): Int = if (this) 1 else 0
