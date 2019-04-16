@@ -94,7 +94,7 @@ class ScacchieraView : View {
                         if (moves % 6 == 0) {
                             val dir = directions.entries.random()
                             shiftMatrix(dir.value)
-                            Snackbar.make(this, "Shift ${dir.key}!", Snackbar.LENGTH_LONG).show()
+                            snackBarMessage { "Shift ${dir.key}!" }
                         }
                     }
                     Difficulty.HARD -> {
@@ -110,13 +110,12 @@ class ScacchieraView : View {
 
                 if (hasWon()) {
                     isPlaying = false
-                    Snackbar.make(this, "Complimenti!! Hai vinto in $moves mosse.", Snackbar.LENGTH_LONG).show()
+                    snackBarMessage { "Complimenti!! Hai vinto in $moves mosse." }
                     victoryListener.onVictory(++victories)
                     regenerateMatrix()
                 }
-
             } else {
-                Snackbar.make(this, "Premi Gioca per cominciare a giocare.", Snackbar.LENGTH_LONG).show()
+                snackBarMessage { "Premi Gioca per cominciare a giocare." }
             }
         }
 
@@ -190,4 +189,8 @@ class ScacchieraView : View {
             fun onMove(n: Int)
         }
     }
+}
+
+fun View.snackBarMessage(string: () -> String) {
+    Snackbar.make(this, string(), Snackbar.LENGTH_LONG).show()
 }
